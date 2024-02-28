@@ -11,35 +11,56 @@
         <Color x:Key="Light">#FFFFF3C3</Color>
         <Color x:Key="Dark">#FF222222</Color>
     </Window.Resources>
+
+
+    <!--Menu Buttons-->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
+        <!-- Sidebar -->
+        <Grid x:Name="Sidebar1" RenderTransformOrigin="0.473,0.516" Margin="0,0,640,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- Menu Buttons -->
+            <TextBlock Name="textblock1" Text="NetShield" TextWrapping="Wrap" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Height="48" Width="150" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0"/>
+            <Button Tag="menuButton" Content="Homepage" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Margin="0,77,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Network Scanner" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick2" Margin="0,149,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Port Scan" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick3" Margin="0,217,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Tips and Tricks" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick4" Margin="0,287,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Settings" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick5" Margin="0,359,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+        </Grid>
 
-        <!--Menu Buttons-->
-        <Button Tag="menuButton" Content="Homepage" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Grid.Column="0" Margin="10,111,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Tag="menuButton" Content="Network Scanner" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Grid.Column="0" Margin="10,154,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Tag="menuButton" Content="Port Scan" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Grid.Column="0" Margin="10,259,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Tag="menuButton" Content="Tips and Tricks" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Grid.Column="0" Margin="10,322,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <Button Tag="menuButton" Content="Settings" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Grid.Column="0" Margin="10,384,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        
+        <!-- Main Content Area -->
+        <Grid x:Name="mainBody" Margin="160,0,0,0" Width="640">
+            <!-- Add main content here -->
+            <!-- Homepage -->
+            <TextBlock Tag="homepage" x:Name="homepageTitle" Text="Welcome to Netshield" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,32,0,0" Height="61" Width="244"/>
+            <TextBlock Tag="homepage" x:Name="homepageDescription" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,135,0,0" Height="194" Width="620"><Run Text="Project Vision NetShield will be a software solution to a common problem. It’s a catch-all program targeted at users with diverse technical backgrounds that aims to identify and target common vulnerabilities in home networks. It will provide a comprehensive view of each discoverable device connected to the network and look for things such as open ports and common passwords that can pose a security risk and guide the user on how to fix these issues."/><LineBreak/><Run/><LineBreak/><Run Text="NetShield aims to educate users about potential risks and be a non-intrusive solution to the common weaknesses often found within home networks and foster a safer digital environment for everyone."/></TextBlock>
 
-        <Button Tag="networkScanner" Content="Show Devices on Network" Click="buttonListDevice" Grid.Column="0" Margin="310,132,304,259" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Red" BorderBrush="#00707070"/>
-        <Button Tag="menuButton" Content="?" Click="buttonClick1" Grid.Column="0" Margin="748,44,27,365" Width="25" Height="25" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="textblock1" Text="NetShield" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Left" TextAlignment="Center"  VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="114"/>
+            <!-- Network Scan -->
+            <ListBox Tag="networkScan" x:Name="listBox1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="300" Margin="406,82,0,0" BorderBrush="#FF0040FF"/>
+            <Button Tag="networkScan" Content="Show Devices on Network" Click="buttonListDevice" Grid.Column="0" Margin="222,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red" BorderBrush="#00707070"/>
 
-        <ListBox x:Name="listBox1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Margin="548,0,0,0" BorderBrush="#FF0040FF"/>
+            <!-- Tips and Tricks -->
+
+            <!-- Settings -->
+            <ToggleButton Tag="settings" x:Name="toggleSwitch" Content="Toggle Night Mode
+                          " Width="108" Height="30" Margin="75,105,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
 
 
-        <TextBlock x:Name="testTextBlock" Text="Testing TextBlock" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Left" TextAlignment="Center"  VerticalAlignment="Top" Margin="176,46,0,0" Height="36" Width="244"/>
+            <Button Tag="menuButton" Content="?" Click="buttonClick1" Grid.Column="0" Margin="582,57,0,0" Width="24" Height="25" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Button Tag="menuButton" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Content="NetworkScanner" Grid.Column="0" Margin="222,253,426,119" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button x:Name="networkScannerButton" Tag="networkScanner" Content="Show Devices on Network" Click="buttonListDevice" Grid.Column="0" Margin="310,196,304,195" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ToggleButton x:Name="toggleSwitch" Content="Switch" Width="60" Height="30" Margin="436,285,304,119" 
-              HorizontalAlignment="Center" VerticalAlignment="Center"
-              Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
 
+
+
+            <TextBlock x:Name="testTextBlock" Text="Testing TextBlock" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Left" TextAlignment="Center"  VerticalAlignment="Top" Margin="386,388,0,0" Height="36" Width="244"/>
+
+
+
+
+
+        </Grid>
     </Grid>
+
+
 
 </Window>
