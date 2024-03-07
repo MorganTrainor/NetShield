@@ -118,9 +118,9 @@ namespace NetShield
             // Change properties when mouse enters the button
             Button button = sender as Button;
             if (nightTheme)
-                button.Background = Brushes.Gray; // Change to a lighter shade of black
+                button.Background = Brushes.Plum;
             else
-                button.Background = Brushes.DarkGoldenrod; // Change to a darker shade of yellow
+                button.Background = Brushes.Indigo;
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
@@ -128,16 +128,14 @@ namespace NetShield
             // Change properties when mouse leaves the button
             Button button = sender as Button;
             if (nightTheme)
-                button.Background = Brushes.Gray; // Change back to the lighter shade of black if night theme is true
+                button.Background = Brushes.Plum;
             else
-                button.Background = Brushes.DarkGoldenrod; // Change back to the darker shade of yellow if night theme is false
+                button.Background = Brushes.Indigo;
         }
 
         private void button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Change the background color of the button to blue when pressed down
-            Button clickedButton = (Button)sender;
-            clickedButton.Background = Brushes.Blue;
+           
         }
 
         private void button_PreviewMouseUp(object sender, MouseButtonEventArgs e)

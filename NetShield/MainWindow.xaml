@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:NetShield"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Background='#FFFFF3C3'>
+        Background='plum'>
     <Window.Resources>
-        <Color x:Key="Light">#FFFFF3C3</Color>
-        <Color x:Key="Dark">#FF222222</Color>
+        <Color x:Key="Light">plum</Color>
+        <Color x:Key="Dark">indigo</Color>
     </Window.Resources>
 
 
@@ -22,11 +22,11 @@
             </Grid.RowDefinitions>
             <!-- Menu Buttons -->
             <TextBlock Name="textblock1" Text="NetShield" TextWrapping="Wrap" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Height="48" Width="150" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0"/>
-            <Button Tag="menuButton" Content="Homepage" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick1" Margin="0,77,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
-            <Button Tag="menuButton" Content="Network Scanner" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick2" Margin="0,149,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
-            <Button Tag="menuButton" Content="Port Scan" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick3" Margin="0,217,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
-            <Button Tag="menuButton" Content="Tips and Tricks" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick4" Margin="0,287,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
-            <Button Tag="menuButton" Content="Settings" Background="#FF222222" Foreground="#FFFFF3C3" Click="buttonClick5" Margin="0,359,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Homepage" Background="indigo" Foreground="plum" Click="buttonClick1" Margin="0,77,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Network Scanner" Background="indigo" Foreground="plum" Click="buttonClick2" Margin="0,149,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Port Scan" Background="indigo" Foreground="plum" Click="buttonClick3" Margin="0,217,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Tips and Tricks" Background="indigo" Foreground="plum" Click="buttonClick4" Margin="0,287,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
+            <Button Tag="menuButton" Content="Settings" Background="indigo" Foreground="plum" Click="buttonClick5" Margin="0,359,0,0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Height="60" VerticalAlignment="Top"/>
         </Grid>
 
         <!-- Main Content Area -->
@@ -41,7 +41,7 @@
             <Button Tag="networkScan" Content="Show Devices on Network" Click="buttonListDevice" Grid.Column="0" Margin="222,147,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red" BorderBrush="#00707070"/>
 
             <!-- Tips and Tricks -->
-
+            <TextBlock Tag="tipsTricks" x:Name="tipsTricksTitle" Text="ISM Practices" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,32,0,0" Height="61" Width="244"/>
             <!-- Settings -->
             <ToggleButton Tag="settings" x:Name="toggleSwitch" Content="Toggle Night Mode
                           " Width="108" Height="30" Margin="75,105,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
