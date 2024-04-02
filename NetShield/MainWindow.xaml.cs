@@ -17,6 +17,7 @@ using System.Net.Sockets;
 using System.Xml.Linq;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
+using System.Diagnostics;
 
 namespace NetShield
 {
@@ -341,12 +342,100 @@ namespace NetShield
             deviceListBox(deviceList);
         }
 
-        private void deviceListBox(List<string> deviceList)
+        private void btnGetFirmwareVersions_Click(object sender, EventArgs e)
+        {
+            // Call methods to get firmware versions
+            string biosVersion = GetBiosVersion();
+            string hardDriveFirmware = GetHardDriveFirmware();
+            
+
+            // Display firmware versions in the ListBox
+            listBoxFirmwareVersions.Items.Add($"BIOS: {biosVersion}");
+            listBoxFirmwareVersions.Items.Add($"Hard Drive: {hardDriveFirmware}");
+            
+        }
+        private string GetHardDriveFirmware()
+        {
+            try
+            {
+                // Run the wmic command to get hard drive firmware version
+                ProcessStartInfo psi = new ProcessStartInfo("wmic", "diskdrive get model,firmwareRevision");
+                psi.RedirectStandardOutput = true;
+                psi.UseShellExecute = false;
+                psi.CreateNoWindow = true;
+
+                Process process = new Process();
+                process.StartInfo = psi;
+                process.Start();
+
+                // Read the output of the command
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                // Extract the firmware version from the output
+                string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                if (lines.Length >= 2)
+                {
+                    return lines[1].Trim(); // Assuming the firmware version is on the second line
+                }
+                else
+                {
+                    return "Firmware version not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+
+        private string GetBiosVersion()
+        {
+            try
+            {
+                // Create a process to run the wmic command
+                ProcessStartInfo psi = new ProcessStartInfo("wmic", "bios get biosversion");
+                psi.RedirectStandardOutput = true;
+                psi.UseShellExecute = false;
+                psi.CreateNoWindow = true;
+
+                Process process = new Process();
+                process.StartInfo = psi;
+                process.Start();
+
+                // Read the output of the command
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                // Extract the BIOS version from the output
+                string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                if (lines.Length >= 2)
+                {
+                    return lines[1].Trim(); // Assuming the BIOS version is on the second line
+                }
+                else
+                {
+                    return "BIOS version not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+    
+
+private void deviceListBox(List<string> deviceList)
         {
             foreach (string device in deviceList)
             {
                 listBox1.Items.Add(device);
             }
+        }
+
+        private void btnGetFirmwareVersions_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

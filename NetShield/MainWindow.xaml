@@ -42,9 +42,11 @@
 
             <!-- Tips and Tricks -->
             <TextBlock Tag="tipsTricks" x:Name="tipsTricksTitle" Text="ISM Practices" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,32,0,0" Height="61" Width="244"/>
+            <ListBox Tag="tipsTricks" x:Name="listBoxFirmwareVersions" Margin="222,82,34,52"/>
+            <Button Tag="tipsTricks" x:Name="btnGetBiosVersion" Content="Get BIOS Version" Click="btnGetFirmwareVersions_Click" Margin="69,105,451,299" />
+
             <!-- Settings -->
-            <ToggleButton Tag="settings" x:Name="toggleSwitch" Content="Toggle Night Mode
-                          " Width="108" Height="30" Margin="75,105,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+            <ToggleButton Tag="settings" x:Name="toggleSwitch" Content="Toggle Night Mode" Margin="75,105,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
 
 
             <Button Tag="menuButton" Content="?" Click="buttonClick1" Grid.Column="0" Margin="582,57,0,0" Width="24" Height="25" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -53,9 +55,6 @@
 
 
             <TextBlock x:Name="testTextBlock" Text="Testing TextBlock" TextWrapping="Wrap" FontFamily="Arial Rounded MT Bold" FontSize="24" HorizontalAlignment="Left" TextAlignment="Center"  VerticalAlignment="Top" Margin="386,388,0,0" Height="36" Width="244"/>
-
-
-
 
 
         </Grid>
