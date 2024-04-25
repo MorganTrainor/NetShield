@@ -18,7 +18,6 @@ C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\bin\Debug\NetShield.exe
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\bin\Debug\NetShield.pdb
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\NetShield.csproj.AssemblyReference.cache
-C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\NetShield.csproj.SuggestedBindingRedirects.cache
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\MainWindow.g.cs
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\App.g.cs
 C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\NetShield_MarkupCompile.cache
@@ -77,3 +76,6 @@ C:\Users\morgan\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\working\N
 C:\Users\morgan\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\working\NetShield\NetShield\obj\Debug\NetShield.csproj.CoreCompileInputs.cache
 C:\Users\morgan\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\working\NetShield\NetShield\obj\Debug\NetShield.exe
 C:\Users\morgan\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\working\NetShield\NetShield\obj\Debug\NetShield.pdb
+C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\bin\Debug\System.CodeDom.dll
+C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\bin\Debug\System.CodeDom.xml
+C:\Users\Fireb\OneDrive\Uni Stuff\Third Year\3000 - Computing Project\NetShield\NetShield\obj\Debug\NetShield.csproj.Up2Date

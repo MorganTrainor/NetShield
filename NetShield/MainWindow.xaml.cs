@@ -18,7 +18,7 @@ using System.Xml.Linq;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
 using System.Diagnostics;
-
+using System.Management;
 namespace NetShield
 {
     // Main
@@ -30,6 +30,8 @@ namespace NetShield
         {
             InitializeComponent();
             SetHomePageVisibleAndEnabled();
+            // Simulate pressing the theme toggle button
+            ToggleButton_Unchecked(null, new RoutedEventArgs());
         }
         private void SetHomePageVisibleAndEnabled()
         {
@@ -64,31 +66,124 @@ namespace NetShield
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             nightTheme = false;
-            ColorAnimation colorAnimation = new ColorAnimation();
-            colorAnimation.From = (Color)FindResource("Dark");
-            colorAnimation.To = (Color)FindResource("Light");
-            colorAnimation.Duration = TimeSpan.FromSeconds(0.3);
+            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.Plum);
+            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.Indigo);
 
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+            // Apply the Plum color to Sidebar1 with animation
+            Grid sidebar = this.FindName("Sidebar1") as Grid;
+            if (sidebar != null)
+                AnimateBackgroundColor(sidebar, sidebar.Background, sidebarBrush);
 
-            ApplyBrushToElements(this, brush, false);
-            
+            // Apply the Indigo color to mainBody with animation
+            Grid mainBody = this.FindName("mainBody") as Grid;
+            if (mainBody != null)
+                AnimateBackgroundColor(mainBody, mainBody.Background, mainBodyBrush);
+
+            // Change menu buttons to Plum
+            ChangeMenuButtonsColor(Colors.Plum, Colors.Indigo);
         }
+
         // theme switch toggle on
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             nightTheme = true;
-            ColorAnimation colorAnimation = new ColorAnimation();
-            colorAnimation.From = (Color)FindResource("Light");
-            colorAnimation.To = (Color)FindResource("Dark");
-            colorAnimation.Duration = TimeSpan.FromSeconds(0.1);
+            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.Indigo);
+            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.Plum);
 
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+            // Apply the Indigo color to Sidebar1 with animation
+            Grid sidebar = this.FindName("Sidebar1") as Grid;
+            if (sidebar != null)
+                AnimateBackgroundColor(sidebar, sidebar.Background, sidebarBrush);
 
-            ApplyBrushToElements(this, brush, true);
-            
+            // Apply the Plum color to mainBody with animation
+            Grid mainBody = this.FindName("mainBody") as Grid;
+            if (mainBody != null)
+                AnimateBackgroundColor(mainBody, mainBody.Background, mainBodyBrush);
+
+            // Change menu buttons to Indigo
+            ChangeMenuButtonsColor(Colors.Indigo, Colors.Plum);
+        }
+
+        // Helper method to animate background color
+        private void AnimateBackgroundColor(UIElement element, Brush fromBrush, Brush toBrush)
+        {
+            // Default color if fromBrush is null
+            Color defaultFromColor = Colors.Transparent;
+
+            if (fromBrush == null)
+            {
+                fromBrush = new SolidColorBrush(defaultFromColor);
+            }
+
+            if (element is Control control)
+            {
+                var colorAnimation = new ColorAnimation
+                {
+                    From = ((SolidColorBrush)fromBrush).Color,
+                    To = ((SolidColorBrush)toBrush).Color,
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+
+                var brush = new SolidColorBrush(((SolidColorBrush)fromBrush).Color);
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+                control.Background = brush;
+            }
+            else if (element is Panel panel)
+            {
+                var colorAnimation = new ColorAnimation
+                {
+                    From = ((SolidColorBrush)fromBrush).Color,
+                    To = ((SolidColorBrush)toBrush).Color,
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+
+                var brush = new SolidColorBrush(((SolidColorBrush)fromBrush).Color);
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+                panel.Background = brush;
+            }
+            else if (element is Border border)
+            {
+                var colorAnimation = new ColorAnimation
+                {
+                    From = ((SolidColorBrush)fromBrush).Color,
+                    To = ((SolidColorBrush)toBrush).Color,
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+
+                var brush = new SolidColorBrush(((SolidColorBrush)fromBrush).Color);
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
+                border.Background = brush;
+            }
+            // Add more cases as necessary for other types that have a Background property
+        }
+
+        // Helper method to change menu buttons color
+        private void ChangeMenuButtonsColor(Color backgroundColor, Color foregroundColor)
+        {
+            foreach (UIElement element in Sidebar1.Children)
+            {
+                if (element is Button button && button.Tag != null && button.Tag.ToString() == "menuButton")
+                {
+                    // Create new SolidColorBrushes for each button to avoid freezing issues
+                    SolidColorBrush backgroundBrush = new SolidColorBrush(((SolidColorBrush)button.Background).Color);
+                    SolidColorBrush foregroundBrush = new SolidColorBrush(foregroundColor);
+
+                    // Apply foreground color
+                    button.Foreground = foregroundBrush;
+
+                    // Adding a simple fade transition for the color change
+                    var anim = new ColorAnimation
+                    {
+                        From = ((SolidColorBrush)button.Background).Color,
+                        To = backgroundColor,
+                        Duration = TimeSpan.FromSeconds(0.3)
+                    };
+
+                    // Apply the animation to a new brush and set it as the button's background
+                    backgroundBrush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
+                    button.Background = backgroundBrush;
+                }
+            }
         }
 
         // apply colour to all elements
@@ -106,6 +201,11 @@ namespace NetShield
                 button.Background = new SolidColorBrush(isLightMode ? lightColor : darkColor);
                 button.Foreground = new SolidColorBrush(isLightMode ? Colors.Black : Colors.White);
             }
+            else if (obj is Grid grid && grid.Name == "Sidebar1") // Check if the object is the Sidebar1 Grid
+            {
+                // Apply the desired color to the Sidebar1 Grid
+                grid.Background = brush;
+            }
 
             int childrenCount = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < childrenCount; i++)
@@ -118,25 +218,31 @@ namespace NetShield
         {
             // Change properties when mouse enters the button
             Button button = sender as Button;
-            if (nightTheme)
-                button.Background = Brushes.Plum;
-            else
-                button.Background = Brushes.Indigo;
+            if (button != null)
+            {
+                if (nightTheme)
+                    button.Background = new SolidColorBrush(Colors.LightGray); // Light color for dark theme
+                else
+                    button.Background = new SolidColorBrush(Colors.DarkGray); // Dark color for light theme
+            }
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-            // Change properties when mouse leaves the button
+            // Reset properties when mouse leaves the button
             Button button = sender as Button;
-            if (nightTheme)
-                button.Background = Brushes.Plum;
-            else
-                button.Background = Brushes.Indigo;
+            if (button != null)
+            {
+                if (nightTheme)
+                    button.Background = new SolidColorBrush(Colors.Indigo); // Dark theme color
+                else
+                    button.Background = new SolidColorBrush(Colors.Plum); // Light theme color
+            }
         }
 
         private void button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-           
+
         }
 
         private void button_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -342,90 +448,9 @@ namespace NetShield
             deviceListBox(deviceList);
         }
 
-        private void btnGetFirmwareVersions_Click(object sender, EventArgs e)
-        {
-            // Call methods to get firmware versions
-            string biosVersion = GetBiosVersion();
-            string hardDriveFirmware = GetHardDriveFirmware();
-            
 
-            // Display firmware versions in the ListBox
-            listBoxFirmwareVersions.Items.Add($"BIOS: {biosVersion}");
-            listBoxFirmwareVersions.Items.Add($"Hard Drive: {hardDriveFirmware}");
-            
-        }
-        private string GetHardDriveFirmware()
-        {
-            try
-            {
-                // Run the wmic command to get hard drive firmware version
-                ProcessStartInfo psi = new ProcessStartInfo("wmic", "diskdrive get model,firmwareRevision");
-                psi.RedirectStandardOutput = true;
-                psi.UseShellExecute = false;
-                psi.CreateNoWindow = true;
 
-                Process process = new Process();
-                process.StartInfo = psi;
-                process.Start();
-
-                // Read the output of the command
-                string output = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-
-                // Extract the firmware version from the output
-                string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                if (lines.Length >= 2)
-                {
-                    return lines[1].Trim(); // Assuming the firmware version is on the second line
-                }
-                else
-                {
-                    return "Firmware version not found";
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"Error: {ex.Message}";
-            }
-        }
-
-        private string GetBiosVersion()
-        {
-            try
-            {
-                // Create a process to run the wmic command
-                ProcessStartInfo psi = new ProcessStartInfo("wmic", "bios get biosversion");
-                psi.RedirectStandardOutput = true;
-                psi.UseShellExecute = false;
-                psi.CreateNoWindow = true;
-
-                Process process = new Process();
-                process.StartInfo = psi;
-                process.Start();
-
-                // Read the output of the command
-                string output = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-
-                // Extract the BIOS version from the output
-                string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                if (lines.Length >= 2)
-                {
-                    return lines[1].Trim(); // Assuming the BIOS version is on the second line
-                }
-                else
-                {
-                    return "BIOS version not found";
-                }
-            }
-            catch (Exception ex)
-            {
-                return $"Error: {ex.Message}";
-            }
-        }
-    
-
-private void deviceListBox(List<string> deviceList)
+        private void deviceListBox(List<string> deviceList)
         {
             foreach (string device in deviceList)
             {
@@ -433,10 +458,85 @@ private void deviceListBox(List<string> deviceList)
             }
         }
 
-        private void btnGetFirmwareVersions_Click(object sender, RoutedEventArgs e)
+        private void firmwareButton_Click(object sender, RoutedEventArgs e)
         {
+            // Clear the ListBox
+            listFirmware.Items.Clear();
 
+            // Get the firmware versions
+            HashSet<string> firmwareVersions = GetFirmwareVersions();
+
+            // Add each firmware version to the ListBox
+            foreach (string version in firmwareVersions)
+            {
+                listFirmware.Items.Add(version);
+            }
+        }
+
+        private HashSet<string> GetFirmwareVersions()
+        {
+            HashSet<string> firmwareVersions = new HashSet<string>();
+
+            // Query WMI for BIOS information
+            ManagementObjectSearcher biosSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
+            foreach (ManagementObject queryObj in biosSearcher.Get())
+            {
+                firmwareVersions.Add($"BIOS Version: {queryObj["Version"]}");
+            }
+
+            // Query WMI for Keyboard information
+            ManagementObjectSearcher keyboardSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Keyboard");
+            foreach (ManagementObject queryObj in keyboardSearcher.Get())
+            {
+                firmwareVersions.Add($"Keyboard: {queryObj["Description"]}");
+            }
+
+            // Query WMI for PointingDevice (Mouse) information
+            ManagementObjectSearcher mouseSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PointingDevice");
+            foreach (ManagementObject queryObj in mouseSearcher.Get())
+            {
+                firmwareVersions.Add($"Mouse: {queryObj["Description"]}");
+            }
+
+            // Query WMI for DiskDrive information
+            ManagementObjectSearcher driveSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            foreach (ManagementObject queryObj in driveSearcher.Get())
+            {
+                firmwareVersions.Add($"Drive: {queryObj["Model"]}");
+            }
+
+            return firmwareVersions;
+        }
+        private void listFirmware_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Get the selected item
+            string selectedItem = listFirmware.SelectedItem as string;
+
+            if (selectedItem != null)
+            {
+                // Check if the selected item is a BIOS entry
+                if (selectedItem.StartsWith("BIOS Version:"))
+                {
+                    // Extract the BIOS version from the selected item
+                    string biosVersion = selectedItem.Substring("BIOS Version: ".Length);
+
+                    // Open a web browser and search for how to update the specific BIOS version
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = $"https://www.google.com/search?q=how+to+update+BIOS+version+{biosVersion}",
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    // Open the Device Manager
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "devmgmt.msc",
+                        UseShellExecute = true
+                    });
+                }
+            }
         }
     }
-
 }
