@@ -38,7 +38,8 @@
 
             <!-- Homepage -->
             <TextBlock Tag="homepage" x:Name="homepageTitle" Text="Netshield" Foreground="White" TextWrapping="Wrap" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Margin="-150,0,655,0" Height="43" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <TextBlock Tag="homepage" x:Name="homepageDescription" TextWrapping="Wrap" Background="White" FontFamily="Arial Rounded MT Bold" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,120,0,0" Height="194" Width="620"><Run Text="Welcome to NetShield! This program serves as a simple solution to the less tech-savvy individuals. Please select your desired option from the sidebar."/></TextBlock>
+            <TextBlock Tag="homepage" x:Name="homepageDescription" TextWrapping="Wrap" Background="White" FontFamily="Arial Rounded MT Bold" FontSize="16" HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Top" Margin="0,120,0,0" Height="58" Width="588"><Run Text="Welcome to NetShield!
+                                                                                                                                                                                                                                                                                         This program serves as a simple solution to the less tech-savvy individuals. Please select your desired option from the sidebar."/></TextBlock>
 
             <!-- Network Scan -->
             <TextBlock Tag="networkScan" Name="networkScanTitle" Text="Network" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Height="43" Width="150" RenderTransformOrigin="0.5,0.5" Foreground="White" VerticalAlignment="Top" TextWrapping="Wrap" Margin="-150,0,655,0" HorizontalAlignment="Left"/>
@@ -53,9 +54,9 @@
             <!-- Tips and Tricks -->
             <TextBlock Tag="tipsTricks" Name="tipsTricksTitle" Text="Tips" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Height="43" Width="150" RenderTransformOrigin="0.5,0.5" Foreground="White" VerticalAlignment="Top" TextWrapping="Wrap" Margin="-150,0,655,0" HorizontalAlignment="Left"/>
 
-            <Button Tag="tipsTricks" Content="Next Tip" Click="ScrollLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,159,0,0" Height="38" Width="150"/>
-            <Button Tag="tipsTricks" Content="Previous Tip" Click="ScrollRight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,116,0,0" Height="38" Width="150"/>
-            <TextBlock Tag="tipsTricks" x:Name="TipText" Text="Tip 1: Use strong passwords." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="216,0,0,0" Height="290" Width="399" Background="White" FontSize="28"/>
+            <Button Tag="tipsTricks" Content="Previous Tip" Click="ScrollLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,159,0,0" Height="38" Width="150" Background="#FF1D1D1D" Foreground="White" BorderBrush="{x:Null}"/>
+            <Button Tag="tipsTricks" Content="Next Tip" Click="ScrollRight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,116,0,0" Height="38" Width="150" Background="#FF1D1D1D" Foreground="White" BorderBrush="{x:Null}"/>
+            <TextBlock Tag="tipsTricks" x:Name="TipText" Padding="8" Text="Tip 1: Use strong passwords." TextWrapping="Wrap" Height="290" Width="399" Background="White" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="216,67,0,0"/>
 
 
             <!-- Settings -->
