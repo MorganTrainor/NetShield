@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,16 +12,15 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Xml.Linq;
-using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
-using System.Diagnostics;
 using System.Management;
+
 namespace NetShield
 {
     // Main
@@ -66,42 +68,42 @@ namespace NetShield
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             nightTheme = false;
-            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.Plum);
-            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.Indigo);
+            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.WhiteSmoke);
+            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.MidnightBlue);
 
-            // Apply the Plum color to Sidebar1 with animation
+            // Apply the WhiteSmoke color to Sidebar1 with animation
             Grid sidebar = this.FindName("Sidebar1") as Grid;
             if (sidebar != null)
                 AnimateBackgroundColor(sidebar, sidebar.Background, sidebarBrush);
 
-            // Apply the Indigo color to mainBody with animation
+            // Apply the MidnightBlue color to mainBody with animation
             Grid mainBody = this.FindName("mainBody") as Grid;
             if (mainBody != null)
                 AnimateBackgroundColor(mainBody, mainBody.Background, mainBodyBrush);
 
-            // Change menu buttons to Plum
-            ChangeMenuButtonsColor(Colors.Plum, Colors.Indigo);
+            // Change menu buttons to WhiteSmoke
+            ChangeMenuButtonsColor(Colors.WhiteSmoke, Colors.MidnightBlue);
         }
 
         // theme switch toggle on
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             nightTheme = true;
-            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.Indigo);
-            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.Plum);
+            SolidColorBrush sidebarBrush = new SolidColorBrush(Colors.MidnightBlue);
+            SolidColorBrush mainBodyBrush = new SolidColorBrush(Colors.WhiteSmoke);
 
-            // Apply the Indigo color to Sidebar1 with animation
+            // Apply the MidnightBlue color to Sidebar1 with animation
             Grid sidebar = this.FindName("Sidebar1") as Grid;
             if (sidebar != null)
                 AnimateBackgroundColor(sidebar, sidebar.Background, sidebarBrush);
 
-            // Apply the Plum color to mainBody with animation
+            // Apply the WhiteSmoke color to mainBody with animation
             Grid mainBody = this.FindName("mainBody") as Grid;
             if (mainBody != null)
                 AnimateBackgroundColor(mainBody, mainBody.Background, mainBodyBrush);
 
-            // Change menu buttons to Indigo
-            ChangeMenuButtonsColor(Colors.Indigo, Colors.Plum);
+            // Change menu buttons to MidnightBlue
+            ChangeMenuButtonsColor(Colors.MidnightBlue, Colors.WhiteSmoke);
         }
 
         // Helper method to animate background color
@@ -160,11 +162,20 @@ namespace NetShield
         // Helper method to change menu buttons color
         private void ChangeMenuButtonsColor(Color backgroundColor, Color foregroundColor)
         {
+            if (Sidebar1 == null)
+            {
+                Debug.WriteLine("Sidebar1 is null");
+                return;
+            }
+
             foreach (UIElement element in Sidebar1.Children)
             {
                 if (element is Button button && button.Tag != null && button.Tag.ToString() == "menuButton")
                 {
-                    // Create new SolidColorBrushes for each button to avoid freezing issues
+                    // Ensure the button's background is not null before accessing its color
+                    if (button.Background == null)
+                        button.Background = new SolidColorBrush(Colors.Transparent); // Set a default color if null
+
                     SolidColorBrush backgroundBrush = new SolidColorBrush(((SolidColorBrush)button.Background).Color);
                     SolidColorBrush foregroundBrush = new SolidColorBrush(foregroundColor);
 
@@ -234,9 +245,9 @@ namespace NetShield
             if (button != null)
             {
                 if (nightTheme)
-                    button.Background = new SolidColorBrush(Colors.Indigo); // Dark theme color
+                    button.Background = new SolidColorBrush(Colors.MidnightBlue); // Dark theme color
                 else
-                    button.Background = new SolidColorBrush(Colors.Plum); // Light theme color
+                    button.Background = new SolidColorBrush(Colors.WhiteSmoke); // Light theme color
             }
         }
 
@@ -282,8 +293,7 @@ namespace NetShield
                 }
             }
 
-            // Perform other actions as needed
-            testTextBlock.Text = "Button 1 clicked!";
+
         }
         private void buttonClick2(object sender, RoutedEventArgs e)
         {
@@ -315,8 +325,8 @@ namespace NetShield
                 }
             }
 
-            // Perform other actions as needed
-            testTextBlock.Text = "Button 2 clicked!";
+
+
         }
         private void buttonClick3(object sender, RoutedEventArgs e)
         {
@@ -332,7 +342,7 @@ namespace NetShield
                     if (element is FrameworkElement frameworkElement && frameworkElement.Tag != null)
                     {
                         // Check if the Tag matches 'networkScan'
-                        if (frameworkElement.Tag.ToString() == "portScan")
+                        if (frameworkElement.Tag.ToString() == "hardwareScan")
                         {
                             // Show the element and make it interactable
                             frameworkElement.Visibility = Visibility.Visible;
@@ -348,8 +358,8 @@ namespace NetShield
                 }
             }
 
-            // Perform other actions as needed
-            testTextBlock.Text = "Button 3 clicked!";
+
+
         }
         private void buttonClick4(object sender, RoutedEventArgs e)
         {
@@ -381,8 +391,8 @@ namespace NetShield
                 }
             }
 
-            // Perform other actions as needed
-            testTextBlock.Text = "Button 4 clicked!";
+
+
         }
         private void buttonClick5(object sender, RoutedEventArgs e)
         {
@@ -414,8 +424,8 @@ namespace NetShield
                 }
             }
 
-            // Perform other actions as needed
-            testTextBlock.Text = "Button 5 clicked!";
+
+
         }
 
 
@@ -423,29 +433,116 @@ namespace NetShield
         private void buttonListDevice(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            List<string> deviceList = new List<string>();
-
-            NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-
-            foreach (NetworkInterface networkInterface in networkInterfaces)
+            string localIP = GetLocalIPAddress();
+            if (string.IsNullOrEmpty(localIP))
             {
-                if (networkInterface.OperationalStatus == OperationalStatus.Up && networkInterface.Supports(NetworkInterfaceComponent.IPv4))
-                {
-                    IPInterfaceProperties ipProperties = networkInterface.GetIPProperties();
-
-                    foreach (UnicastIPAddressInformation ip in ipProperties.UnicastAddresses)
-                    {
-                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            deviceList.Add(ip.Address.ToString());
-                        }
-                    }
-                }
+                listBox1.Items.Add("Failed to obtain local IP address.");
+                return;
             }
 
-            // Call deviceListBox method to populate the ListBox
-            listBox1.ItemsSource = null;
-            deviceListBox(deviceList);
+            string subnetMask = "255.255.255.0"; // Common subnet mask
+            string baseIP = CalculateBaseIP(localIP, subnetMask);
+
+            List<Task> pingTasks = new List<Task>();
+
+            // Adjust the range based on your actual subnet mask
+            for (int i = 1; i <= 254; i++) // Scanning the whole subnet
+            {
+                string ip = $"{baseIP}.{i}";
+                pingTasks.Add(PingAndLogAsync(ip));
+            }
+
+            Task.WhenAll(pingTasks).ContinueWith(tasks =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    listBox1.Items.Add("Ping scan complete.");
+                });
+            });
+        }
+
+        private async Task PingAndLogAsync(string ipAddress)
+        {
+            using (Ping pingSender = new Ping()) // Create a new Ping instance for each task
+            {
+                try
+                {
+                    PingReply reply = await pingSender.SendPingAsync(ipAddress, 1000); // 1000 ms timeout
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            listBox1.Items.Add($"Active IP: {ipAddress} - Response Time: {reply.RoundtripTime}ms");
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            listBox1.Items.Add($"No response from: {ipAddress} - Status: {reply.Status}");
+                        });
+                    }
+                }
+                catch (PingException ex) // More specific exception type for ping failures
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        listBox1.Items.Add($"Ping exception for {ipAddress}: {ex.Message}");
+                    });
+                    Debug.WriteLine($"Ping exception to {ipAddress}: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        listBox1.Items.Add($"General error pinging {ipAddress}: {ex.Message}");
+                    });
+                    Debug.WriteLine($"General error pinging {ipAddress}: {ex.Message}");
+                }
+            }
+        }
+
+        private string CalculateBaseIP(string ipAddress, string subnetMask)
+        {
+            byte[] ipBytes = IPAddress.Parse(ipAddress).GetAddressBytes();
+            byte[] maskBytes = IPAddress.Parse(subnetMask).GetAddressBytes();
+            byte[] baseIPBytes = new byte[ipBytes.Length];
+
+            for (int i = 0; i < baseIPBytes.Length; i++)
+            {
+                baseIPBytes[i] = (byte)(ipBytes[i] & maskBytes[i]);
+            }
+
+            return new IPAddress(baseIPBytes).ToString();
+        }
+        private async Task<PingReply> PingAsync(string ipAddress, Ping pingSender)
+        {
+            try
+            {
+                return await pingSender.SendPingAsync(ipAddress, 1000); // 1000 ms timeout
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Ping to {ipAddress} failed: {ex.Message}");
+                return null; // Return null if an exception occurs
+            }
+        }
+
+        private string GetLocalIPAddress()
+        {
+            try
+            {
+                using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+                {
+                    socket.Connect("8.8.8.8", 65530); // Google's DNS server IP
+                    IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
+                    return endPoint.Address.ToString();
+                }
+            }
+            catch
+            {
+                return null; // Return null if an exception occurs
+            }
         }
 
 
@@ -532,11 +629,35 @@ namespace NetShield
                     // Open the Device Manager
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = "devmgmt.msc",
+                        FileName = "devmgmt.`   msc",
                         UseShellExecute = true
                     });
                 }
             }
+        }
+
+        private int currentTipIndex = 0;
+        private string[] tips = { "Use strong passwords.", "Enable two-factor authentication.", "Regularly update your software." };
+
+        private void ScrollLeft(object sender, RoutedEventArgs e)
+        {
+            currentTipIndex = (currentTipIndex - 1 + tips.Length) % tips.Length;
+            UpdateTipText();
+        }
+
+        private void ScrollRight(object sender, RoutedEventArgs e)
+        {
+            currentTipIndex = (currentTipIndex + 1) % tips.Length;
+            UpdateTipText();
+        }
+
+        private void UpdateTipText()
+        {
+            TipText.Text = $"Tip {currentTipIndex + 1}: {tips[currentTipIndex]}";
+        }
+        private void listFirmware_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
