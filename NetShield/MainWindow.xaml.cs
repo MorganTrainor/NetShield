@@ -100,7 +100,6 @@ namespace NetShield
             // Change menu buttons to WhiteSmoke
             ChangeMenuButtonsColor(Colors.WhiteSmoke, Colors.MidnightBlue);
         }
-
         // theme switch toggle on
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -179,7 +178,6 @@ namespace NetShield
                 brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnimation);
                 border.Background = brush;
             }
-            // Add more cases as necessary for other types that have a Background property
         }
 
         // Helper method to change menu buttons color
@@ -283,7 +281,7 @@ namespace NetShield
             }
         }
 
-      
+
         private void button_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             // Revert the background color of the button to its original color when released
@@ -418,10 +416,8 @@ namespace NetShield
                     }
                 }
             }
-
-
-
         }
+
         private void buttonClick5(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;

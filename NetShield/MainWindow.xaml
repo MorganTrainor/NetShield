@@ -49,7 +49,7 @@
             <!-- Hardware Scan -->
             <TextBlock Tag="hardwareScan" x:Name="hardwareScanTitle" Text="Hardware" TextWrapping="Wrap" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Margin="-150,0,655,0" Width="150" Foreground="White" VerticalAlignment="Top" Height="43" HorizontalAlignment="Left"/>
             <ListBox Tag="hardwareScan" x:Name="listFirmware" MouseDoubleClick="listFirmware_MouseDoubleClick" Width="399" Height="290" HorizontalAlignment="Left" Margin="216,67,0,0" BorderBrush="MidnightBlue" BorderThickness="2,2,2,2" VerticalAlignment="Top"/>
-            <Button Tag="hardwareScan" x:Name="firmwareButton" Content="Get Firmware Versions" Click="firmwareButton_Click" Margin="52,116,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF1D1D1D" Foreground="White" BorderThickness="0,0,0,0" Height="37" Width="150" />
+            <Button Tag="hardwareScan" x:Name="firmwareButton" Content="View Hardware and BIOS" Click="firmwareButton_Click" Margin="52,116,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF1D1D1D" Foreground="White" BorderThickness="0,0,0,0" Height="37" Width="150" />
 
             <!-- Tips and Tricks -->
             <TextBlock Tag="tipsTricks" Name="tipsTricksTitle" Text="Tips" FontFamily="Harlow Solid Italic" FontSize="28" TextAlignment="Center" Height="43" Width="150" RenderTransformOrigin="0.5,0.5" Foreground="White" VerticalAlignment="Top" TextWrapping="Wrap" Margin="-150,0,655,0" HorizontalAlignment="Left"/>
